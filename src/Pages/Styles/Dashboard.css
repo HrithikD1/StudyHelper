@@ -1,0 +1,85 @@
+/* Dashboard.css */
+
+/* General styles */
+body {
+  background-color: #afdde5; /* Light teal for entire page background */
+}
+
+.dashboard-container {
+  display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 200px;
+  background-color: #003135; /* Dark teal */
+  color: #ffffff; /* White text */
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-right: 1px solid #024950; /* Darker teal for border */
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-nav li {
+  padding: 10px 20px;
+  border-bottom: 1px solid #024950; /* Darker teal for border */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.sidebar-nav li:last-child {
+  border-bottom: none; /* Remove border for last sidebar item */
+}
+
+.sidebar-nav li a {
+  text-decoration: none;
+  color: #ffffff; /* White text */
+  display: block; /* Ensure links fill the entire list item */
+}
+
+.sidebar-nav li a:hover {
+  background-color: #0fa4af; /* Light blue */
+}
+
+/* Dashboard content styles */
+.dashboard-content {
+  margin-left: 200px;
+  padding: 20px;
+  color: #333333; /* Dark gray text color for content */
+}
+
+.dashboard-content header h1 {
+  margin-bottom: 20px;
+  color: #003135; /* Dark teal */
+}
+
+.dashboard-content main p {
+  font-size: 1.2em;
+  line-height: 1.6; /* Increase line height for better readability */
+}
+
+.dashboard-content footer {
+  margin-top: 20px;
+}
+
+/* Additional styles */
+.sidebar-nav li.active a {
+  background-color: #0fa4af; /* Light blue */
+}
+
+.dashboard-content header {
+  border-bottom: 1px solid #024950; /* Darker teal for border */
+  padding-bottom: 20px; /* Add some padding at the bottom of header */
+}
+
+.dashboard-content footer p {
+  font-size: 0.9em; /* Decrease font size of footer text */
+}

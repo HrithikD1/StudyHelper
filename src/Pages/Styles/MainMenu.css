@@ -1,0 +1,61 @@
+/* MainMenu.css */
+
+/* Styles for the header */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  header h1 {
+    font-size: 2em;
+    color: #333;
+    margin: 0; /* Remove default margins */
+  }
+  
+  /* Align header text in the middle */
+  header h1 {
+    display: inline-block; /* Make the heading a block element */
+  }
+  
+  
+
+/* Styles for the main content */
+main {
+    text-align: center;
+    border: 2px solid #ccc; /* Add border around main content */
+    border-radius: 10px; /* Add border radius */
+    padding: 20px; /* Add padding inside main content */
+    margin: 20px auto; /* Center main content horizontally */
+    max-width: 800px; /* Limit main content width */
+  }
+  
+  main p {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Styles for the section */
+  section {
+    margin-top: 40px;
+  }
+  
+  section h2 {
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  section a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  section a:hover {
+    background-color: #0056b3;
+  }
+  
