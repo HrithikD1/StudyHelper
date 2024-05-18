@@ -4,6 +4,7 @@ import MainMenu from './Pages/MainMenu';
 import React, { useState } from 'react';
 import axios from 'axios';
 import Techniques from "./Pages/Techniques";
+import PomodoroTimer from "./Pages/Techniques/PomodoroTimer";
 
 function App() {
   function post_data(){
@@ -34,7 +35,10 @@ function App() {
       <Routes>
           <Route index element={<MainMenu />} />
           <Route path="Dashboard" element={<Dashboard/>} />
-          <Route path="Techniques" element={<Techniques/>} />
+          <Route path="Techniques" element={<Techniques/>}>
+            <Route path="Pomodoro" element={<PomodoroTimer />} />
+            <Route path="Blurting" element={<Blurting />} />
+          </Route>
       </Routes>
     </BrowserRouter>
   );
