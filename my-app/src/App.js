@@ -4,7 +4,8 @@ import MainMenu from './Pages/MainMenu';
 import React, { useState } from 'react';
 import Techniques from "./Pages/Techniques";
 import PomodoroTimer from "./Pages/Techniques/PomodoroTimer";
-import Notes from "./Pages/NotesAndReminders";
+import Notes from "./Pages/Notes";
+import Blurting from "./Pages/Techniques/BlurtingTechnique";
 
 function App() {
   return (

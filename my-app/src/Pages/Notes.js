@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { firestore, storage } from '../firebase';
+import { firestore, storage } from '../firebase.js'
 
 function Notes() {
     const [file, setFile] = useState(null);
@@ -33,7 +33,7 @@ function Notes() {
         await fileRef.set({
             name: file.name,
             url: fileURL,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            createdAt: firestore.FieldValue.serverTimestamp(),
         });
 
         // Update the local state with the new file
