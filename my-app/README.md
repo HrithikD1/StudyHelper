@@ -1,6 +1,5 @@
-# Getting Started with Create React App
+Hello, This my StudyHelper app where i am making a platform which helps me to study for tests and store my notes and remind my of assignments, etc.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
