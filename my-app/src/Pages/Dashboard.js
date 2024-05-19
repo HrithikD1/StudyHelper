@@ -27,7 +27,6 @@ export default function Dashboard() {
             <nav className="sidebar">
                 <ul className="sidebar-nav">
                     <li><Link to="/Techniques">Study Techniques</Link></li>
-                    <li><Link to="/timers">Timers</Link></li>
                     <li><Link to="/ai">AI Study Assistant</Link></li>
                 </ul>
             </nav>

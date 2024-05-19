@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Blurting() {
+function PomodoroTimer() {
   return (
     <div>Blurting</div>
   )
 }
 
-export default Blurting;
+export default PomodoroTimer;
