@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore";
 import styled from "styled-components";
 import { db } from "../firebase";
-import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 // Styled components
 const Button = styled.button`
@@ -184,13 +185,13 @@ const Timetable = () => {
                 onChange={(e) => updateTableLabel(index, e.target.value)}
               />
               <Button className="delete" onClick={() => deleteTable(index)}>
-                <AiOutlineClose /> Delete Table
+                <FontAwesomeIcon icon={faTimes} /> Delete Table
               </Button>
             </div>
           ))}
         </div>
         <Button onClick={addTable}>
-          <AiOutlinePlus /> Add Table
+          <FontAwesomeIcon icon={faPlus} /> Add Table
         </Button>
       </section>
       <section>
@@ -199,14 +200,14 @@ const Timetable = () => {
           <div key={index}>
             <h3>Table {index + 1}</h3>
             <Button className="delete" onClick={() => deleteTable(index)}>
-              <AiOutlineClose /> Delete Table
+              <FontAwesomeIcon icon={faTimes} /> Delete Table
             </Button>
             <div style={{ marginBottom: "10px" }}>
               <Button onClick={() => addColumn("weekdays")}>
-                <AiOutlinePlus /> Add Column
+                <FontAwesomeIcon icon={faPlus} /> Add Column
               </Button>
               <Button onClick={() => addRow("weekdays")}>
-                <AiOutlinePlus /> Add Row
+                <FontAwesomeIcon icon={faPlus} /> Add Row
               </Button>
             </div>
             <table style={{ borderCollapse: "collapse", border: "2px solid #ccc", marginBottom: "20px", width: "100%" }}>
@@ -235,7 +236,7 @@ const Timetable = () => {
                         ""
                       ) : (
                         <Button className="delete" onClick={() => deleteRow("weekdays", rowIndex)}>
-                          <AiOutlineClose /> Delete Row
+                          <FontAwesomeIcon icon={faTimes} /> Delete Row
                         </Button>
                       )}
                     </td>
@@ -246,7 +247,7 @@ const Timetable = () => {
             <div>
               {tableData.weekdays[0].map((cell, colIndex) => (
                 <Button key={colIndex} className="delete" onClick={() => deleteColumn("weekdays", colIndex)}>
-                  <AiOutlineClose /> Delete Column
+                  <FontAwesomeIcon icon={faTimes} /> Delete Column
                 </Button>
               ))}
             </div>
@@ -254,10 +255,10 @@ const Timetable = () => {
               <h2>Friday</h2>
               <div style={{ marginBottom: "10px" }}>
                 <Button onClick={() => addColumn("friday")}>
-                  <AiOutlinePlus /> Add Column
+                  <FontAwesomeIcon icon={faPlus} /> Add Column
                 </Button>
                 <Button onClick={() => addRow("friday")}>
-                  <AiOutlinePlus /> Add Row
+                  <FontAwesomeIcon icon={faPlus} /> Add Row
                 </Button>
               </div>
               <table style={{ borderCollapse: "collapse", border: "2px solid #ccc", marginBottom: "20px", width: "100%" }}>
@@ -286,7 +287,7 @@ const Timetable = () => {
                           ""
                         ) : (
                           <Button className="delete" onClick={() => deleteRow("friday", rowIndex)}>
-                            <AiOutlineClose /> Delete Row
+                            <FontAwesomeIcon icon={faTimes} /> Delete Row
                           </Button>
                         )}
                       </td>
@@ -297,7 +298,7 @@ const Timetable = () => {
               <div>
                 {tableData.friday[0].map((cell, colIndex) => (
                   <Button key={colIndex} className="delete" onClick={() => deleteColumn("friday", colIndex)}>
-                    <AiOutlineClose /> Delete Column
+                    <FontAwesomeIcon icon={faTimes} /> Delete Column
                   </Button>
                 ))}
               </div>
