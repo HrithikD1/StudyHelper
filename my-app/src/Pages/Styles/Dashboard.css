@@ -119,3 +119,17 @@ table td input {
 table td button {
   margin-top: 5px;
 }
+
+main {
+  position: relative;
+
+}
+
+footer {
+  position: fixed;
+  bottom: 0%;
+}
+
+hr {
+  width: 100%;
+}

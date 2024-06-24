@@ -21,6 +21,7 @@ header {
 
 /* Styles for the main content */
 main {
+  align-self: center;
     text-align: center;
     border: 2px solid #ccc; /* Add border around main content */
     border-radius: 10px; /* Add border radius */

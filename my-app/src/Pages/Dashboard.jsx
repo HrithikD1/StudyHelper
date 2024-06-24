@@ -44,6 +44,7 @@ export default function Dashboard() {
                         <Timetable />
                     </section>
                     <footer>
+                        <hr />
                         <p>© 2024 StudyHelper. All rights reserved.</p>
                     </footer>
                 </div>
