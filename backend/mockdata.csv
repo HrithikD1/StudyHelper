@@ -1,6 +1,6 @@
-ID,Name,Department,Salary
-1,John Doe,Engineering,70000
-2,Jane Smith,Marketing,65000
-3,Emily Johnson,Sales,60000
-4,Michael Brown,Engineering,75000
-5,Jessica Williams,Marketing,68000
+Subject,Time
+Math,9:00,10:00
+Science,10:00,11:00
+English,11:00,12:00
+Social,12:00,1:00
+PE,2:00,3:00

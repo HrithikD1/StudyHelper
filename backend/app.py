@@ -1,38 +1,24 @@
-from flask import Flask, request, send_file, jsonify
+from flask import Flask, request, render_template
+from flask_cors import CORS
 import pandas as pd
 import os
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'uploads'
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
+CORS(app)
 
-@app.route('/mockdata', methods=['GET'])
-def get_mock_data():
-    df = pd.read_csv('mockdata.csv')
-    return df.to_json(orient="records")
+data = pd.read_csv("mockdata.csv")
+print(data.to_string())
 
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    if 'file' not in request.files:
-        return jsonify({"error": "No file part"})
-    
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({"error": "No selected file"})
-    
-    if file:
-        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
-        file.save(filepath)
-        return jsonify({"success": True, "filepath": filepath})
+@app.route("/backend", methods=["GET", "POST"])
+def backend():
+    if request.method == "GET":
+        return data.to_json()
+    if request.method == "POST":
+        data = request.data
 
-@app.route('/download', methods=['POST'])
-def download_file():
-    data = request.get_json()
-    df = pd.DataFrame(data['tableData'])
-    filepath = os.path.join(UPLOAD_FOLDER, 'edited_file.csv')
-    df.to_csv(filepath, index=False)
-    return send_file(filepath, as_attachment=True)
+@app.route("/")
+def view():
+    return render_template("view.html", data=data.to_html())
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)

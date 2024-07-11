@@ -13,8 +13,8 @@ function App() {
       <Routes>
           <Route index element={<MainMenu />} />
           <Route path="Dashboard" element={<Dashboard/>} />
-          <Route path="Techniques" element={<Techniques/>}>
           <Route path="Notes" element={<Notes />} />
+          <Route path="Techniques" element={<Techniques/>}>
             <Route path="Pomodoro" element={<PomodoroTimer />} />
             <Route path="Blurting" element={<Blurting />} />
           </Route>

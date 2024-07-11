@@ -22,6 +22,7 @@
     "styled": "^1.0.0",
     "styled-components": "^6.1.11"
   },
+  "proxy": "https://localhost:5000",
   "devDependencies": {
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",

@@ -1,4 +1,3 @@
-// Dashboard.jsx
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
@@ -7,19 +6,19 @@ import './Styles/Dashboard.css';
 
 function Clock() {
     const [currentTime, setCurrentTime] = useState(moment().format('MMMM Do YYYY, h:mm a'));
-  
+
     useEffect(() => {
-      const intervalId = setInterval(() => {
-        setCurrentTime(moment().format('MMMM Do YYYY, h:mm a'));
-      }, 1000); // Update every second
-      let n = 0
-      console.log("time update", n)
-      n++;
-      return () => clearInterval(intervalId); // Cleanup on component unmount
+        const intervalId = setInterval(() => {
+            setCurrentTime(moment().format('MMMM Do YYYY, h:mm a'));
+        }, 1000); // Update every second
+        let n = 0;
+        console.log("time update", n);
+        n++;
+        return () => clearInterval(intervalId); // Cleanup on component unmount
     }, []);
-  
+
     return <h1>{currentTime}</h1>;
-  }
+}
 
 export default function Dashboard() {
     return (
@@ -35,19 +34,23 @@ export default function Dashboard() {
                     <header>
                         <h1>Welcome to StudyHelper Dashboard</h1>
                     </header>
-                    <main>
+                    <main className="main-content">
                         <p>This is your StudyHelper dashboard. Navigate through the links on the left to access different features.</p>
                         <Clock />
-                        {/* Add additional dashboard content here */}
                     </main>
-                    <section>
-                        <Timetable />
+                    <section className="recents">
+                        <ul>
+                            <li></li>
+                        </ul>
                     </section>
                     <footer>
                         <hr />
                         <p>© 2024 StudyHelper. All rights reserved.</p>
                     </footer>
                 </div>
+                <section className="timetable-section">
+                    <Timetable />
+                </section>
             </div>
         </>
     );

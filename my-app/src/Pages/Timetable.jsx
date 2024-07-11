@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-function Timetable() {
-
-  return (
-   <div>h</div>
-  );
+export default function Timetable(){
+    const [data, setData] = useState();
+    useEffect(() => {
+        axios.get("/backend")
+        .then(response => setData(response.data))
+        .catch(error => console.error(error))
+    })
+    return(
+        <></>
+    )
 }
-
-export default Timetable;
