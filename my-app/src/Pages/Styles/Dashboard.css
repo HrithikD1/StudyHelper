@@ -139,20 +139,6 @@ hr {
   width: 100%;
 }
 
-/* Timetable styles */
-.timetable-section {
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 300px; /* Set the width of the timetable */
-  height: 100%; /* Ensure the timetable section spans the full height of the page */
-  background-color: #e0e0e0; /* Light gray background */
-  padding: 20px; /* Add padding inside the timetable */
-  border-left: 1px solid #ccc; /* Add a left border */
-  overflow-y: auto; /* Make sure it's scrollable if content overflows */
-  box-sizing: border-box;
-}
-
 .recents {
   margin-top: 20px;
 }
