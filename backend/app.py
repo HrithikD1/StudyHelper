@@ -1,22 +1,23 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from flask_cors import CORS
 import pandas as pd
-import os
 
 app = Flask(__name__)
 CORS(app)
 
 data = pd.read_csv("mockdata.csv")
-print(data.to_string())
+print(data.to_json())
 
-@app.route("/backend", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def backend():
     if request.method == "GET":
-        return data.to_json()
+        return data.to_json(orient="records")
     if request.method == "POST":
-        data = request.data
+        received_data = request.get_json()
+        # Process the received data if needed
+        return jsonify(received_data)
 
-@app.route("/")
+@app.route("/backend")
 def view():
     return render_template("view.html", data=data.to_html())
 
