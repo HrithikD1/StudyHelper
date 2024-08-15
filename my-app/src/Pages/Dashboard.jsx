@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import Timetable from './Timetable';
+import pb from '../pocketbase';
 import './Styles/Dashboard.css';
 
 function Clock() {
@@ -20,6 +21,22 @@ function Clock() {
     return <h1>{currentTime}</h1>;
 }
 
+const handleLogout = async () => {
+    try {
+      // Log out from PocketBase
+      await pb.authStore.clear(); // Clear the authentication store
+
+      // Optionally, clear any other local data
+      localStorage.removeItem('userName'); // Remove stored user name
+
+      // Redirect to login page
+      navigate('/Login');
+    } catch (err) {
+      console.error('Logout failed:', err);
+      alert('Logout failed. Please try again.');
+    }
+  };
+
 export default function Dashboard() {
     return (
         <>
@@ -27,6 +44,7 @@ export default function Dashboard() {
                 <ul className="sidebar-nav">
                     <li><Link to="/Techniques">Study Techniques</Link></li>
                     <li><Link to="/ai">AI Study Assistant</Link></li>
+                    <li><button onClick={Logout()}>Logout</button></li>
                 </ul>
             </nav>
             <div className="dashboard-container">

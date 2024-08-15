@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/backend': {
-        target: 'http://localhost:5000', // or the correct URL for your backend
+        target: 'http://127.0.0.1:5000', // or the correct URL for your backend
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/backend/, ''),
       },

@@ -122,6 +122,19 @@ table td button {
   margin-top: 5px;
 }
 
+button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  text-decoration: none;
+  color: #ffffff; /* White text */
+  display: block; /* Ensure links fill the entire list item */
+  font-size: 1em; /* Set font size */
+}
+
 main {
   position: relative;
 }
