@@ -1,39 +1,61 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./Styles/Timetable.css"; // Import the CSS file
-import { FaArrowRight, FaArrowLeft } from "react-icons/fa"; // Import arrow icons
+import "./Styles/Timetable.css";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import pb from "../pocketbase";
 
 export default function Timetable() {
   const [data, setData] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
-  const [isTimetableVisible, setIsTimetableVisible] = useState(true); // State to control timetable visibility
+  const [isTimetableVisible, setIsTimetableVisible] = useState(true);
+  const userId = pb.authStore.model?.id; // Assuming user is already logged in
 
   useEffect(() => {
-    axios.get("/backend")
-      .then(response => {
-        setData(response.data); // Assuming the backend returns the data correctly
-      })
-      .catch(error => console.error(error));
-  }, []);
+    if (userId) {
+      pb.collection("timetables")
+        .getFullList(1, {
+          filter: `userId = "${userId}"`,
+        })
+        .then((response) => {
+          if (response.length === 0) {
+            // No timetable exists, create a default one
+            const defaultTimetable = {
+              userId: userId,
+              data: [
+                { Subject: "Math", Time: "09:00 AM", End: "10:00 AM" },
+                { Subject: "Science", Time: "10:00 AM", End: "11:00 AM" },
+              ],
+            };
+            pb.collection("timetables").create(defaultTimetable).then(() => {
+              setData(defaultTimetable.data);
+            });
+          } else {
+            setData(response[0]?.data || []);
+          }
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [userId]);
 
   const handleEditClick = () => {
     if (isEditable) {
-      // Save changes if in edit mode
-      axios.post("/backend", data)
-        .then(response => {
-          console.log("Changes saved successfully");
-          setIsEditable(false);
-          setIsTimetableVisible(false); // Hide timetable after saving changes
-        })
-        .catch(error => console.error("Error saving changes:", error));
+      if (userId) {
+        pb.collection("timetables")
+          .update(data.id, { data })
+          .then(() => {
+            console.log("Changes saved successfully");
+            setIsEditable(false);
+            setIsTimetableVisible(false);
+          })
+          .catch((error) => console.error("Error saving changes:", error));
+      }
     } else {
       setIsEditable(true);
     }
   };
 
   const handleToggleTimetable = () => {
-    setIsTimetableVisible(!isTimetableVisible); // Toggle timetable visibility
-    setIsEditable(false); // Ensure edit mode is off when toggling timetable visibility
+    setIsTimetableVisible(!isTimetableVisible);
+    setIsEditable(false);
   };
 
   const handleInputChange = (index, field, value) => {
@@ -42,13 +64,21 @@ export default function Timetable() {
     setData(updatedData);
   };
 
+  const addRow = () => {
+    setData([...data, { Subject: "", Time: "", End: "" }]);
+  };
+
+  const removeRow = (index) => {
+    const updatedData = data.filter((_, i) => i !== index);
+    setData(updatedData);
+  };
+
   return (
     <div className="timetable-container">
-      {/* Menu Icon Button */}
       <button className="menu-button" onClick={handleToggleTimetable}>
         {isTimetableVisible ? <FaArrowLeft className="menu-icon" /> : <FaArrowRight className="menu-icon" />}
       </button>
-      
+
       {isTimetableVisible && (
         <div className="timetable-content">
           <h1>Timetable</h1>
@@ -56,6 +86,7 @@ export default function Timetable() {
             <button onClick={handleEditClick}>
               {isEditable ? "Save Changes" : "Edit Timetable"}
             </button>
+            {isEditable && <button onClick={addRow}>Add Row</button>}
           </div>
           {isEditable ? (
             <div className="edit-section">
@@ -66,6 +97,7 @@ export default function Timetable() {
                     <th>Subject</th>
                     <th>Start Time</th>
                     <th>End Time</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -91,6 +123,9 @@ export default function Timetable() {
                           value={item.End}
                           onChange={(e) => handleInputChange(index, "End", e.target.value)}
                         />
+                      </td>
+                      <td>
+                        <button onClick={() => removeRow(index)}>Remove Row</button>
                       </td>
                     </tr>
                   ))}

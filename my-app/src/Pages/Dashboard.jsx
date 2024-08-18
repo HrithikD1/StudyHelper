@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Add useNavigate for navigation
 import Timetable from './Timetable';
 import pb from '../pocketbase';
 import './Styles/Dashboard.css';
@@ -12,39 +12,36 @@ function Clock() {
         const intervalId = setInterval(() => {
             setCurrentTime(moment().format('MMMM Do YYYY, h:mm a'));
         }, 1000); // Update every second
-        let n = 0;
-        console.log("time update", n);
-        n++;
         return () => clearInterval(intervalId); // Cleanup on component unmount
     }, []);
 
     return <h1>{currentTime}</h1>;
 }
 
-const handleLogout = async () => {
-    try {
-      // Log out from PocketBase
-      await pb.authStore.clear(); // Clear the authentication store
-
-      // Optionally, clear any other local data
-      localStorage.removeItem('userName'); // Remove stored user name
-
-      // Redirect to login page
-      navigate('/Login');
-    } catch (err) {
-      console.error('Logout failed:', err);
-      alert('Logout failed. Please try again.');
-    }
-  };
-
 export default function Dashboard() {
+    const navigate = useNavigate(); // Initialize navigate
+
+    const handleLogout = async () => {
+        try {
+            // Log out from PocketBase
+            await pb.authStore.clear(); // Clear the authentication store
+    
+            // Redirect to home page
+            navigate('/'); // Redirecting to the home page
+        } catch (err) {
+            console.error('Logout failed:', err);
+            alert('Logout failed. Please try again.');
+        }
+    };
+    
+
     return (
         <>
             <nav className="sidebar">
                 <ul className="sidebar-nav">
                     <li><Link to="/Techniques">Study Techniques</Link></li>
                     <li><Link to="/ai">AI Study Assistant</Link></li>
-                    <li><button onClick={Logout()}>Logout</button></li>
+                    <li><button onClick={handleLogout}>Logout</button></li> {/* Corrected this line */}
                 </ul>
             </nav>
             <div className="dashboard-container">
